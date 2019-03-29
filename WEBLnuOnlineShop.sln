@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28307.136
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WEBLnuOnlineShop", "WEBLnuOnlineShop\WEBLnuOnlineShop.csproj", "{032F83B9-B97B-46C2-93E2-2AE111F084A8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL.csproj", "{A3229641-6A0C-4C1A-95A2-77F138B8CAA0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{032F83B9-B97B-46C2-93E2-2AE111F084A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{032F83B9-B97B-46C2-93E2-2AE111F084A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{032F83B9-B97B-46C2-93E2-2AE111F084A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A3229641-6A0C-4C1A-95A2-77F138B8CAA0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3229641-6A0C-4C1A-95A2-77F138B8CAA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3229641-6A0C-4C1A-95A2-77F138B8CAA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3229641-6A0C-4C1A-95A2-77F138B8CAA0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
