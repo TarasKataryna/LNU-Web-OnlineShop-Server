@@ -6,7 +6,7 @@ namespace DAL.UnitOfWork
 {
     public interface IUnitOfWork
     {
-        UserManager<IdentityUser<int>> UserManager { get; set; }
+        UserManager<User> UserManager { get; set; }
 
         RoleManager<IdentityRole<int>> RoleManager { get; set; }
 

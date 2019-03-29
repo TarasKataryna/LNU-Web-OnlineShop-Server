@@ -7,7 +7,7 @@ namespace DAL.UnitOfWork
 {
     public class UnitOfWork:IUnitOfWork
     {
-        public UserManager<IdentityUser<int>> UserManager { get; set; }
+        public UserManager<User> UserManager { get; set; }
 
         public RoleManager<IdentityRole<int>> RoleManager { get; set; }
 
@@ -19,7 +19,7 @@ namespace DAL.UnitOfWork
 
         private ShopContext ShopContext;
 
-        public UnitOfWork(ShopContext context,UserManager<IdentityUser<int>> manager, RoleManager<IdentityRole<int>> roleManager )
+        public UnitOfWork(ShopContext context,UserManager<User> manager, RoleManager<IdentityRole<int>> roleManager )
         {
             this.ShopContext = context;
             this.UserManager = manager;
@@ -31,7 +31,7 @@ namespace DAL.UnitOfWork
 
         public void Save()
         {
-            ShopContext.SaveChangesAsync();
+            ShopContext.SaveChanges();
         }
 
     }

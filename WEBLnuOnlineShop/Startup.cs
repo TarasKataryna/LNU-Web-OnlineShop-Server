@@ -12,7 +12,8 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
-using DAL.Entities; 
+using DAL.Entities;
+using DAL.UnitOfWork;
 
 namespace WEBLnuOnlineShop
 {
@@ -30,6 +31,7 @@ namespace WEBLnuOnlineShop
             services.AddDbContext<ShopContext>(options => options.UseSqlServer(Configuration.GetConnectionString("OnlineShop")));
             services.AddIdentity<User,IdentityRole<int>>().AddEntityFrameworkStores<ShopContext>().AddDefaultTokenProviders();
 
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
