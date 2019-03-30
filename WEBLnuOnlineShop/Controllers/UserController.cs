@@ -8,6 +8,7 @@ using DAL.UnitOfWork;
 using DAL.ModelsDto;
 using WEBLnuOnlineShop.Attributes;
 using DAL.Extension;
+using WEBLnuOnlineShop.Common;
 
 namespace WEBLnuOnlineShop.Controllers
 {
@@ -27,7 +28,7 @@ namespace WEBLnuOnlineShop.Controllers
         public IActionResult SignUp([FromBody] SignUpDto model)
         {
             var user = this.UnitOfWork.UserManager.FindByEmailAsync(model.Email);
-            if (user== null)
+            if (user == null)
             {
                 var userToCreate = model.ToUser();
                 var hasher = this.UnitOfWork.UserManager.PasswordHasher;
@@ -41,15 +42,28 @@ namespace WEBLnuOnlineShop.Controllers
                 return BadRequest("Username is already exist.");
             }
 
-            
+
         }
 
         [ValidateModel]
         [HttpPost("[action]")]
         public IActionResult LogIn([FromBody] LogInDto model)
         {
-
-            return Ok();
-        } 
+            RoleInitializer.InitializeAsync(UnitOfWork.UserManager, UnitOfWork.RoleManager).GetAwaiter().GetResult();
+            var user = UnitOfWork.UserManager.FindByEmailAsync(model.Email).GetAwaiter().GetResult();
+            if (user == null)
+            {
+                return BadRequest("Your email or password is invalid");
+            }
+            else
+            {
+                if (!this.UnitOfWork.UserManager.CheckPasswordAsync(user, model.Password).Result)
+                {
+                    return BadRequest("Your email or password is invalid");
+                }
+                else
+                    return Ok();
+            }
+        }
     }
 }
