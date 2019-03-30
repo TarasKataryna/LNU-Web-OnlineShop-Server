@@ -21,8 +21,7 @@ namespace WEBLnuOnlineShop.Common
             }
             var user = await userManager.FindByEmailAsync("tarikkataryna1999@gmail.com");
 
-           var a =  await userManager.AddToRoleAsync(user, "Admin");
-            int r = 3;
+           await userManager.AddToRoleAsync(user, "Admin");  
         }
     }
 }
