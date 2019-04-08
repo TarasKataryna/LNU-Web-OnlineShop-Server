@@ -1,17 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using DAL.Entities;
 
-namespace DAL.Entities
+namespace DAL.ModelsDto
 {
-    public enum Hoodies
-    {
-        Sweatshirt,
-        Bomber,
-        Hoody
-    }
-
-    public class Hoody : Product
+    public class TShirtDto
     {
         public int Id { get; set; }
 
@@ -25,16 +19,14 @@ namespace DAL.Entities
 
         public string Brand { get; set; }
 
-        public Hoodies Type { get; set; }
-
         public Color Color { get; set; }
+
+        public DAL.Entities.Type Type { get; set; }
+
+        public Gender Gender { get; set; }
 
         public int? OrderId { get; set; }
 
-        public Order Order { get; set; }
-
         public int ImageId { get; set; }
-
-        public Image Image { get; set; }
     }
 }

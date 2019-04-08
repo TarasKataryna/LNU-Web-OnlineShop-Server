@@ -7,7 +7,7 @@ namespace DAL.UnitOfWork
 {
     public class UnitOfWork:IUnitOfWork
     {
-        public UserManager<IdentityUser<int>> UserManager { get; set; }
+        public UserManager<User> UserManager { get; set; }
 
         public RoleManager<IdentityRole<int>> RoleManager { get; set; }
 
@@ -17,9 +17,11 @@ namespace DAL.UnitOfWork
 
         public IRepository<TShirt> TShirts { get; set; }
 
+        public IRepository<Image> Images { get; set; }
+
         private ShopContext ShopContext;
 
-        public UnitOfWork(ShopContext context,UserManager<IdentityUser<int>> manager, RoleManager<IdentityRole<int>> roleManager )
+        public UnitOfWork(ShopContext context,UserManager<User> manager, RoleManager<IdentityRole<int>> roleManager )
         {
             this.ShopContext = context;
             this.UserManager = manager;
@@ -27,11 +29,12 @@ namespace DAL.UnitOfWork
             Orders = new Repository<Order>(ShopContext);
             Hoodies = new Repository<Hoody>(ShopContext);
             TShirts = new Repository<TShirt>(ShopContext);
+            Images = new Repository<Image>(ShopContext);
         }
 
         public void Save()
         {
-            ShopContext.SaveChangesAsync();
+            ShopContext.SaveChanges();
         }
 
     }
