@@ -5,7 +5,7 @@ using DAL.Entities;
 
 namespace DAL.ModelsDto
 {
-    public class HoddieDto
+    public class HoodyDto
     {
         public int Id { get; set; }
 
@@ -25,6 +25,6 @@ namespace DAL.ModelsDto
 
         public int? OrderId { get; set; }
 
-        public int ImgId { get;set; }
+        public int ImageId { get;set; }
     }
 }

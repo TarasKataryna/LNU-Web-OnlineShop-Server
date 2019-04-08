@@ -32,7 +32,7 @@ namespace WEBLnuOnlineShop
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ShopContext>(options => options.UseSqlServer(Configuration.GetConnectionString("OnlineShop")));
+            //services.AddDbContext<ShopContext>(options => options.UseSqlServer(Configuration.GetConnectionString("OnlineShop")));
             services.AddIdentity<User,IdentityRole<int>>().AddEntityFrameworkStores<ShopContext>().AddDefaultTokenProviders();
             services.AddAuthentication(opts =>
             {
