@@ -6,7 +6,7 @@ namespace DAL.UnitOfWork
 {
     public interface IUnitOfWork
     {
-        UserManager<IdentityUser<int>> UserManager { get; set; }
+        UserManager<User> UserManager { get; set; }
 
         RoleManager<IdentityRole<int>> RoleManager { get; set; }
 
@@ -15,6 +15,8 @@ namespace DAL.UnitOfWork
         IRepository<Hoody> Hoodies { get; set; }
 
         IRepository<TShirt> TShirts { get; set; }
+
+        IRepository<Image> Images { get; set; }
 
         void Save();
     }

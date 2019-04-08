@@ -4,14 +4,16 @@ using DAL.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DAL.Migrations
 {
     [DbContext(typeof(ShopContext))]
-    partial class ShopContextModelSnapshot : ModelSnapshot
+    [Migration("20190329215738_User")]
+    partial class User
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -31,8 +33,6 @@ namespace DAL.Migrations
 
                     b.Property<double>("Count");
 
-                    b.Property<int>("ImageId");
-
                     b.Property<string>("Name");
 
                     b.Property<int>("OrderId");
@@ -45,24 +45,9 @@ namespace DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ImageId");
-
                     b.HasIndex("OrderId");
 
                     b.ToTable("Hoodies");
-                });
-
-            modelBuilder.Entity("DAL.Entities.Image", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<byte[]>("Img");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Images");
                 });
 
             modelBuilder.Entity("DAL.Entities.Order", b =>
@@ -98,8 +83,6 @@ namespace DAL.Migrations
 
                     b.Property<int>("Gender");
 
-                    b.Property<int>("ImageId");
-
                     b.Property<string>("Name");
 
                     b.Property<int>("OrderId");
@@ -111,8 +94,6 @@ namespace DAL.Migrations
                     b.Property<int>("Type");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ImageId");
 
                     b.HasIndex("OrderId");
 
@@ -285,11 +266,6 @@ namespace DAL.Migrations
 
             modelBuilder.Entity("DAL.Entities.Hoody", b =>
                 {
-                    b.HasOne("DAL.Entities.Image", "Image")
-                        .WithMany()
-                        .HasForeignKey("ImageId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
                     b.HasOne("DAL.Entities.Order", "Order")
                         .WithMany()
                         .HasForeignKey("OrderId")
@@ -306,11 +282,6 @@ namespace DAL.Migrations
 
             modelBuilder.Entity("DAL.Entities.TShirt", b =>
                 {
-                    b.HasOne("DAL.Entities.Image", "Image")
-                        .WithMany()
-                        .HasForeignKey("ImageId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
                     b.HasOne("DAL.Entities.Order", "Order")
                         .WithMany()
                         .HasForeignKey("OrderId")
