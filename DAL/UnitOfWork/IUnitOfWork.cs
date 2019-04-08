@@ -16,6 +16,8 @@ namespace DAL.UnitOfWork
 
         IRepository<TShirt> TShirts { get; set; }
 
+        IRepository<Image> Images { get; set; }
+
         void Save();
     }
 }
