@@ -23,8 +23,8 @@ namespace DAL.ModelsDto
 
         public Color Color { get; set; }
 
-        public int? OrderId { get; set; }
-
         public int ImageId { get;set; }
+
+        public double? CountToBuy { get; set; }
     }
 }

@@ -13,6 +13,8 @@ using DAL.ModelsDto;
 using DAL.Extension;
 using System.Net.Http.Headers;
 using Microsoft.AspNetCore.Authorization;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 
 namespace WEBLnuOnlineShop.Controllers
 {
@@ -45,6 +47,17 @@ namespace WEBLnuOnlineShop.Controllers
             return Ok();
         }
 
+        [HttpPost("[action]")]
+        public IActionResult CreateShirt(TShirtDto model)
+        {
+            var shirt = model.ToShirt();
+
+            UnitOfWork.TShirts.Create(shirt);
+            UnitOfWork.Save();
+
+            return Ok();
+
+        }
 
         [HttpGet("[action]")]
         public IActionResult GetAllTShirts()
@@ -128,13 +141,40 @@ namespace WEBLnuOnlineShop.Controllers
             return Ok();
         }
 
+        [Authorize]
         [HttpPost("[action]")]
         public IActionResult Buy(BuyProductsDto model)
         {
-            var shirts = model.shirts.Select(p =>
+            var identity = HttpContext.User.Identity;
+            var claimsIdentity = (ClaimsIdentity)identity;
+            var userId = int.Parse(claimsIdentity.FindFirst("UserId").Value);
+
+            var order = new Order()
             {
-                return p.ToShirt();
-            });
+                Date = model.order.Date,
+                UserId = model.order.UserId,
+                TotalSum = model.order.TotalSum
+            };
+
+            UnitOfWork.Orders.Create(order);
+            UnitOfWork.Save();
+
+            foreach (var item in model.shirts)
+            {
+                var shirt = UnitOfWork.TShirts.GetAllEntitiesByFilter(s => s.Id == item.Id).ToList().First();
+                shirt.Count -= item.CountToBuy.Value;
+                UnitOfWork.TShirts.Update(shirt);
+               
+            }
+
+            foreach (var item in model.hoodies)
+            {
+                var hoody = UnitOfWork.Hoodies.GetAllEntitiesByFilter(s => s.Id == item.Id).ToList().First();
+                hoody.Count -= item.CountToBuy.Value;
+                UnitOfWork.Hoodies.Update(hoody);
+            }
+
+            UnitOfWork.Save();
 
             return Ok();
         }

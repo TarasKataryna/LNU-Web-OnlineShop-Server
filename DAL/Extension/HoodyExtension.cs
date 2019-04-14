@@ -20,7 +20,6 @@ namespace DAL.Extension
                 Brand = model.Brand,
                 Color = model.Color,
                 Type = model.Type,
-                OrderId = model.OrderId,
                 ImageId = model.ImageId
             };
             return hoddie;
@@ -36,7 +35,6 @@ namespace DAL.Extension
             model.Brand = hoody.Brand;
             model.Color = hoody.Color;
             model.Type = hoody.Type;
-            model.OrderId = hoody.OrderId;
             model.ImageId = hoody.ImageId;
         }
     }

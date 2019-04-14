@@ -21,7 +21,6 @@ namespace DAL.Extension
                 Color = model.Color,
                 Type = model.Type,
                 Gender = model.Gender,
-                OrderId = model.OrderId,
                 ImageId = model.ImageId
             };
             return shirt;
@@ -38,7 +37,6 @@ namespace DAL.Extension
             model.Color = shirt.Color;
             model.Type = shirt.Type;
             model.Gender = shirt.Gender;
-            model.OrderId = shirt.OrderId;
             model.ImageId = shirt.ImageId;
         }
     }
