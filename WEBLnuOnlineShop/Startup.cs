@@ -14,6 +14,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Cors;
 
 using DAL.Entities;
 using DAL.UnitOfWork;
@@ -23,15 +24,26 @@ namespace WEBLnuOnlineShop
 {
     public class Startup
     {
+        public IConfiguration Configuration { get; }
+
+        public string Cors { get; set; }
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+
+            Cors = configuration["Origins"];
         }
 
-        public IConfiguration Configuration { get; }
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+            {
+                options.AddPolicy(
+                    "AllowSpecificOrigin",
+                    builder => builder.WithOrigins(Cors).AllowAnyHeader().AllowAnyMethod().AllowCredentials());
+            });
             services.AddDbContext<ShopContext>(options => options.UseSqlServer(Configuration.GetConnectionString("OnlineShop")));
             services.AddIdentity<User,IdentityRole<int>>().AddEntityFrameworkStores<ShopContext>().AddDefaultTokenProviders();
             services.AddAuthentication(opts =>
@@ -61,6 +73,7 @@ namespace WEBLnuOnlineShop
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            app.UseCors("AllowSpecificOrigin");
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -69,7 +82,6 @@ namespace WEBLnuOnlineShop
             {
                 app.UseHsts();
             }
-
             app.UseAuthentication();
             app.UseHttpsRedirection();
             app.UseMvc();

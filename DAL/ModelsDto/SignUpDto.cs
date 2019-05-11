@@ -9,8 +9,8 @@ namespace DAL.ModelsDto
         public string Email { get; set; }
 
         [Required]
-        [MinLength(8)]
-        [RegularExpression(@"^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=.,\-_!])([a-zA-Z0-9 @#$%^&+=*.,\-_!]){8,}$", ErrorMessage = "The Password field is not a valid password")]
+        //[MinLength(8)]
+        //[RegularExpression(@"^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=.,\-_!])([a-zA-Z0-9 @#$%^&+=*.,\-_!]){8,}$", ErrorMessage = "The Password field is not a valid password")]
         public string Password { get; set; }
 
         [Required]

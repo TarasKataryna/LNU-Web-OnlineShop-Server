@@ -30,7 +30,7 @@ namespace WEBLnuOnlineShop.Controllers
 
         [ValidateModel]
         [HttpPost("[action]")]
-        public IActionResult SignUp([FromBody] SignUpDto model)
+        public IActionResult SignUp(SignUpDto model)
         {
             var user = this.UnitOfWork.UserManager.FindByEmailAsync(model.Email).GetAwaiter().GetResult();
             if (user == null)
