@@ -62,7 +62,9 @@ namespace WEBLnuOnlineShop.Controllers
         [HttpGet("[action]")]
         public IActionResult GetAllTShirts()
         {
-            return Ok(UnitOfWork.TShirts.GetAllEntities());
+            var list = UnitOfWork.TShirts.GetAllEntities();
+            list.ToList().ForEach(item => item.Image = UnitOfWork.Images.GetAllEntitiesByFilter(i => i.Id == item.ImageId).FirstOrDefault());
+            return Ok(list);
         }
 
         [HttpGet("[action]")]

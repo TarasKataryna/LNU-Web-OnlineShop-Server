@@ -57,7 +57,7 @@ namespace WEBLnuOnlineShop.Controllers
 
         [ValidateModel]
         [HttpPost("[action]")]
-        public IActionResult LogIn([FromBody] LogInDto model)
+        public IActionResult LogIn(LogInDto model)
         {
             var user = this.UnitOfWork.UserManager.FindByEmailAsync(model.Email).Result;
 
