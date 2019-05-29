@@ -23,6 +23,7 @@ namespace DAL.UnitOfWork
 
         public UnitOfWork(ShopContext context,UserManager<User> manager, RoleManager<IdentityRole<int>> roleManager )
         {
+
             this.ShopContext = context;
             this.UserManager = manager;
             this.RoleManager = roleManager;
@@ -30,6 +31,7 @@ namespace DAL.UnitOfWork
             Hoodies = new Repository<Hoody>(ShopContext);
             TShirts = new Repository<TShirt>(ShopContext);
             Images = new Repository<Image>(ShopContext);
+
         }
 
         public void Save()

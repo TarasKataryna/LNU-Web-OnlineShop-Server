@@ -29,6 +29,7 @@ namespace DAL.Entities
         public DbSet<Order> Orders { get; set; }
 
         public DbSet<Image> Images { get; set; }
+  
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

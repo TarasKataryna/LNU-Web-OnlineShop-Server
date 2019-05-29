@@ -180,5 +180,23 @@ namespace WEBLnuOnlineShop.Controllers
 
             return Ok();
         }
+
+        [HttpGet("[action]")]
+        public IActionResult GetForCart(string prod)
+        {
+            List<Object> list = new List<object>();
+            var products = prod.Split(",");
+            foreach (var id in products)
+            {
+                list.Add(UnitOfWork.TShirts.GetAllEntitiesByFilter(item=>item.Id == int.Parse(id)));
+            }
+
+            return Ok(list);
+        }
+    }
+
+    public class forcart
+    {
+        public string[] products { get; set; }
     }
 }

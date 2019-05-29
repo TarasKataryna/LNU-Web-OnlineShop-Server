@@ -65,13 +65,12 @@ namespace WEBLnuOnlineShop
                     IssuerSigningKey = JwtManager.GetSymmetricSecurityKey()
                 };
             });
-
+            services.AddTransient<Seed>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env,Seed seeder)
         {
             app.UseCors("AllowSpecificOrigin");
             if (env.IsDevelopment())
@@ -82,6 +81,8 @@ namespace WEBLnuOnlineShop
             {
                 app.UseHsts();
             }
+
+            //seeder.SeedUsers();
             app.UseAuthentication();
             app.UseHttpsRedirection();
             app.UseMvc();
